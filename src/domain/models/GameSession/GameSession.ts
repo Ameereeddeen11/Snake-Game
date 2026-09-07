@@ -1,12 +1,10 @@
-import { Snake } from "@/domain/models/Snake/props";
 import { createSnake, moveSnake, hasSelfCollision } from "@/domain/models/Snake/Snake";
-import { Food } from "@/domain/models/Food/props";
 import { spawnFood } from "@/domain/models/Food/Food";
 import { areCoordinatesEqual, getNextCoordinate } from "@/domain/models/Coordinate/Coordinate";
 import { Coordinate } from "@/domain/models/Coordinate/CoordinateInterface";
 import { isOppositeDirection } from "@/domain/models/Direction/Direction";
 import { DirectionType, DIRECTIONS } from "@/domain/models/Direction/constants";
-import {GameStatus, GameStatusType} from "./constants";
+import { GameStatus } from "./constants";
 import { GridDimensions, GameSessionProps } from "./props";
 
 export const createGameSession = (
@@ -36,7 +34,7 @@ export const startGame = (
     if (session.status === GameStatus.RUNNING) return session;
     return {
         ...session,
-        status: GameStatus.PAUSED
+        status: GameStatus.RUNNING
     };
 };
 
