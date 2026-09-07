@@ -1,12 +1,7 @@
-import {areCoordinatesEqual, Coordinate, getNextCoordinate} from "@/domain/models/Coordinate";
-import { DirectionType } from "@/domain/models/Direction";
-import {snap} from "@expo/ui/jetpack-compose/modifiers";
-
-
-export interface Snake {
-    readonly body: readonly Coordinate[];
-    readonly direction: DirectionType;
-}
+import { areCoordinatesEqual, getNextCoordinate } from "@/domain/models/Coordinate/Coordinate";
+import { Coordinate } from "@/domain/models/Coordinate/CoordinateInterface";
+import { DirectionType } from "@/domain/models/Direction/constants";
+import { Snake } from "./props";
 
 export const createSnake = (
     initialCoordinates: Coordinate[],
@@ -40,6 +35,6 @@ export const hasSelfCollision = (
 ): boolean => {
     const segmentsToCheck = willGrow ? snake.body : snake.body.slice(0, -1);
     return segmentsToCheck.some((
-        segment) => areCoordinatesEqual(segment, nextHead)
+        segment: Coordinate) => areCoordinatesEqual(segment, nextHead)
     );
 }

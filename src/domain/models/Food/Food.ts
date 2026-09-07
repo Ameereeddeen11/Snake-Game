@@ -1,11 +1,9 @@
-import {areCoordinatesEqual, Coordinate} from "@/domain/models/Coordinate";
-
-export interface Food {
-    readonly position: Coordinate;
-}
+import { areCoordinatesEqual } from "@/domain/models/Coordinate/Coordinate";
+import { Coordinate } from "@/domain/models/Coordinate/CoordinateInterface";
+import { Food } from "./props";
 
 export const spawnFood = (
-    occupation: Coordinate[],
+    occupation: readonly Coordinate[],
     gridSize: {
         width: number,
         height: number
