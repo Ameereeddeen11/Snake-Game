@@ -1,9 +1,5 @@
-import { DirectionType, DIRECTIONS } from "@/domain/models/Direction";
-
-export interface Coordinate {
-    readonly x: number;
-    readonly y: number;
-}
+import { DIRECTIONS, DirectionType } from "@/domain/models/Direction/constants";
+import { Coordinate } from "./CoordinateInterface";
 
 export const createCoordinate = (
     x: number,
