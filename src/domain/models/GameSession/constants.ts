@@ -7,3 +7,5 @@ export const GameStatus = {
 } as const;
 
 export type GameStatusType = (typeof GameStatus)[keyof typeof GameStatus];
+
+export const TickInterval = 150;

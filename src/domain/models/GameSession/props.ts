@@ -1,6 +1,7 @@
 import {Snake} from "@/domain/models/Snake/props";
 import {Food} from "@/domain/models/Food/props";
 import {GameStatusType} from "@/domain/models/GameSession/constants";
+import {DirectionType} from "@/domain/models/Direction/constants";
 
 export interface GridDimensions {
     readonly width: number;
@@ -9,6 +10,7 @@ export interface GridDimensions {
 
 export interface GameSessionProps  {
     readonly snake: Snake;
+    readonly lastMovedDirection: DirectionType;
     readonly food: Food | null;
     readonly grid: GridDimensions;
     readonly status: GameStatusType;

@@ -1,5 +1,5 @@
 import { createSnake, moveSnake, hasSelfCollision } from "@/domain/models/Snake/Snake";
-import { spawnFood } from "@/domain/models/Food/Food";
+import {generateFood, spawnFood} from "@/domain/models/Food/Food";
 import { areCoordinatesEqual, getNextCoordinate } from "@/domain/models/Coordinate/Coordinate";
 import { Coordinate } from "@/domain/models/Coordinate/CoordinateInterface";
 import { isOppositeDirection } from "@/domain/models/Direction/Direction";
@@ -21,6 +21,7 @@ export const createGameSession = (
 
     return {
         snake: initialSnake,
+        lastMovedDirection: DIRECTIONS.UP,
         food: spawnFood(initialSnake.body, grid),
         grid,
         status: GameStatus.IDLE,
@@ -54,7 +55,7 @@ export const changeDirection = (
     newDirection: DirectionType
 ): GameSessionProps => {
     if (session.status !== GameStatus.RUNNING) return session;
-    if (isOppositeDirection(session.snake.direction, newDirection)) return session;
+    if (isOppositeDirection(session.lastMovedDirection, newDirection)) return session;
 
     return {
         ...session,
@@ -105,6 +106,7 @@ export const tick = (
         return {
             ...session,
             snake: updateSnake,
+            lastMovedDirection: session.snake.direction,
             food: nextFood,
             score: session.score + 10,
             status: hasWon ? GameStatus.VICTORY : GameStatus.RUNNING
@@ -113,6 +115,7 @@ export const tick = (
 
     return {
         ...session,
-        snake: updateSnake
+        snake: updateSnake,
+        lastMovedDirection: session.snake.direction
     };
 };
