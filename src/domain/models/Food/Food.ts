@@ -9,23 +9,26 @@ export const spawnFood = (
         height: number
     }
 ): Food | null => {
-    if (occupation.length >= gridSize.width * gridSize.height) {
+    const emptyCells: Coordinate[] = [];
+
+    for (let x = 0; x < gridSize.width; x++) {
+        for (let y = 0; y < gridSize.height; y++) {
+            const isOccupied = occupation.some(
+                (segment) => segment.x === x && segment.y === y
+            );
+
+            if (!isOccupied) {
+                emptyCells.push({ x, y });
+            }
+        }
+    }
+
+    if (emptyCells.length === 0) {
         return null;
     }
 
-    const randomX = Math.random() * gridSize.width;
-    const randomY = Math.random() * gridSize.height;
-
-    const newPosition: Coordinate = {
-        x: Math.floor(randomX),
-        y: Math.floor(randomY)
-    };
-
-    if (occupation.some((segment) => areCoordinatesEqual(segment, newPosition))) {
-        return spawnFood(occupation, gridSize);
-    }
-
+    const randomIndex = Math.floor(Math.random() * emptyCells.length);
     return {
-        position: newPosition
+        position: emptyCells[randomIndex]
     };
 };

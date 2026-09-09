@@ -6,17 +6,12 @@ SplashScreen.preventAutoHideAsync();
 
 export default function TabLayout() {
     return (
-        <GestureHandlerRootView
-            style={{flex: 1}}
-        >
-            <Stack>
-                <Stack.Screen
-                    name="index"
-                    options={{
-                        headerShown: false
-                    }}
-                />
-            </Stack>
+        <GestureHandlerRootView style={{flex: 1}}>
+            <Stack
+                screenOptions={{
+                    headerShown: false,
+                }}
+            />
         </GestureHandlerRootView>
     );
 };
